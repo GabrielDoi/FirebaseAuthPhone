@@ -1,0 +1,19 @@
+{
+  "name": "firebaseauthphone",
+  "version": "0.0.2",
+  "description": "cordova plugin para firebase auth phone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firebase",
+    "auth",
+    "phone",
+    "native",
+    "plugin",
+    "cordova"
+  ],
+  "author": "Gabriel ZDoi",
+  "license": "ISC"
+}
