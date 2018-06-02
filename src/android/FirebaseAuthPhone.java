@@ -1,4 +1,4 @@
-package cordova-plugin-firebaseauthphone;
+package cordova.plugin.firebaseauthphone;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
