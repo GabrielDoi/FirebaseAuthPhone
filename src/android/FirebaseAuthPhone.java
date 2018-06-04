@@ -69,7 +69,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
         }else if(action.equals("verifyPhoneNumber")) {
 
-            this.verifyPhoneNumber(args.getJSONObject(0).getString("numero"), Long.parseLong(args.getJSONObject(0).getString("tempo")), callbackContext);
+            this.verifyPhoneNumber(args.getJSONObject(0).getString("phoneNumber"), Long.parseLong(args.getJSONObject(0).getString("timeoutMillis")), callbackContext);
             return true;
 
         }else if (action.equals("coolMethod")) {
@@ -154,13 +154,13 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     private void createUserWithEmailAndPassword(String email, String password, CallbackContext callbackContext) {
         this.signinCallback = callbackContext;
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        this.firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(cordova.getActivity(), this);
     }
 
     //medodos que deve colocar no executar
     private void sendEmailVerification(final CallbackContext callbackContext) {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        FirebaseUser user = this.firebaseAuth.getCurrentUser();
 
         if (user == null) {
             callbackContext.error("User is not authorized");
@@ -236,16 +236,16 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     private void signInWithVerificationId(String verificationId, String code, CallbackContext callbackContext) {
         this.signinCallback = callbackContext;
 
-        signInWithPhoneCredential(PhoneAuthProvider.getCredential(verificationId, code));
+        this.signInWithPhoneCredential(PhoneAuthProvider.getCredential(verificationId, code));
     }
 
     //medodos que deve colocar no executar
     private void verifyPhoneNumber(String phoneNumber, long timeoutMillis, final CallbackContext callbackContext) {
-        phoneAuthProvider.verifyPhoneNumber(phoneNumber, timeoutMillis, MILLISECONDS, cordova.getActivity(),
+        this.phoneAuthProvider.verifyPhoneNumber(phoneNumber, timeoutMillis, MILLISECONDS, cordova.getActivity(),
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential credential) {
-                    signInWithPhoneCredential(credential);
+                    this.signInWithPhoneCredential(credential);
                 }
 
                 @Override
@@ -262,10 +262,10 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     }
 
     private void signInWithPhoneCredential(PhoneAuthCredential credential) {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        FirebaseUser user = this.firebaseAuth.getCurrentUser();
 
         if (user == null) {
-            firebaseAuth.signInWithCredential(credential)
+            this.firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(cordova.getActivity(), FirebaseAuthPhone.this);
         } else {
             user.updatePhoneNumber(credential)
@@ -283,9 +283,9 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     //medodos que deve colocar no executar
     private void setLanguageCode(String languageCode, CallbackContext callbackContext) {
         if (languageCode == null) {
-            firebaseAuth.useAppLanguage();
+            this.firebaseAuth.useAppLanguage();
         } else {
-            firebaseAuth.setLanguageCode(languageCode);
+            this.firebaseAuth.setLanguageCode(languageCode);
         }
 
         callbackContext.success();

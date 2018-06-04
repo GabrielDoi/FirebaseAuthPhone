@@ -14,7 +14,11 @@ module.exports.substract = function (arg0, success, error) {
 };
 
 module.exports.getIdToken = function (_forceRefresh, success, error) {
-    if (_forceRefresh == null) _forceRefresh = false;
-    alert("teste "+_forceRefresh);
     exec(success, error, PLUGIN_NAME, "getIdToken", [{forceRefresh: _forceRefresh}]);
+};
+
+module.exports.verifyPhoneNumber = function(_phoneNumber, _timeoutMillis, success, error) {
+	alert("tel - "+_phoneNumber)
+	alert('time - '+_timeoutMillis)
+	exec(success, error, PLUGIN_NAME, "verifyPhoneNumber", [{phoneNumber: _phoneNumber, timeoutMillis: _timeoutMillis}]);
 };
