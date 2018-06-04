@@ -111,21 +111,17 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
     private void substract(int p1, int p2, CallbackContext callback) {
 
-        if(p1 != null && p2 != null) {
+        try{
+            //int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
+            //int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
 
-            try{
-                //int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
-                //int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
+            callback.success(""+ (p1-p2) );
 
-                callback.success(""+ (p1-p2) );
-
-            }catch(Exception ex){
-                callback.error("Alguma coisa de errado: "+ ex);
-            }
-
-        }else{
-            callback.error("Porfavor nao passe valores null");
+        }catch(Exception ex){
+            callback.error("Alguma coisa de errado: "+ ex);
         }
+
+    
     }
 
     //===========================================================================================
