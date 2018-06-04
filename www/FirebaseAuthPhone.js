@@ -9,8 +9,10 @@ module.exports.add = function (arg0, success, error) {
 	exec(success, error, PLUGIN_NAME, 'add', [arg0]);
 };
 
-module.exports.substract = function (arg0, success, error) {
-	exec(success, error, PLUGIN_NAME, 'substract', [arg0]);
+module.exports.substract = function (p1, p2, success, error) {
+	alert('p1- '+p1)
+	alert('p2- '+p2)
+	exec(success, error, PLUGIN_NAME, 'substract', [{param1:p1, param2:p2}]);
 };
 
 module.exports.getIdToken = function (_forceRefresh, success, error) {

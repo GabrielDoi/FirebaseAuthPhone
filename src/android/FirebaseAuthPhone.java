@@ -59,7 +59,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
         }else if(action.equals("substract")) {
 
-            this.substract(args, callbackContext);
+            this.substract(Integer.parseInt(args.getJSONObject(0).getString("param1")), Integer.parseInt(args.getJSONObject(0).getString("param2")), callbackContext);
             return true;
 
         }else if(action.equals("getIdToken")) {
@@ -109,13 +109,13 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
         }
     }
 
-    private void substract(JSONArray args, CallbackContext callback) {
+    private void substract(int p1, int p2, CallbackContext callback) {
 
         if(args != null) {
 
             try{
-                int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
-                int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
+                //int p1 = Integer.parseInt(args.getJSONObject(0).getString("param1"));
+                //int p2 = Integer.parseInt(args.getJSONObject(0).getString("param2"));
 
                 callback.success(""+ (p1-p2) );
 
