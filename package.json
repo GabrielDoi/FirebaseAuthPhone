@@ -1,6 +1,6 @@
 {
   "name": "firebaseauthphone",
-  "version": "1.1.0",
+  "version": "1.0.0",
   "description": "cordova plugin para firebase auth phone",
   "main": "index.js",
   "scripts": {

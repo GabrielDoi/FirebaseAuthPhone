@@ -2,6 +2,9 @@ package cordova.plugin.firebaseauthphone;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaWebView;
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.PluginResult;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -66,7 +69,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
         }else if(action.equals("verifyPhoneNumber")) {
 
-            this.verifyPhoneNumber(args.getJSONObject(0).getString("numero"), args.getJSONObject(0).getString("tempo"), callbackContext);
+            this.verifyPhoneNumber(args.getJSONObject(0).getString("numero"), Long.parseLong(args.getJSONObject(0).getString("tempo")), callbackContext);
             return true;
 
         }else if (action.equals("coolMethod")) {
@@ -263,10 +266,10 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
         if (user == null) {
             firebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(cordova.getActivity(), FirebaseAuthenticationPlugin.this);
+                .addOnCompleteListener(cordova.getActivity(), FirebaseAuthPhone.this);
         } else {
             user.updatePhoneNumber(credential)
-                .addOnCompleteListener(cordova.getActivity(), FirebaseAuthenticationPlugin.this);
+                .addOnCompleteListener(cordova.getActivity(), FirebaseAuthPhone.this);
         }
     }
 
