@@ -40,7 +40,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     private CallbackContext authStateCallback;
 
     @Override
-    protected void initialize(CordovaInterface cordova, CordovaWebView webView) {
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
 
         Log.d(TAG, "Starting Firebase Authentication plugin");
