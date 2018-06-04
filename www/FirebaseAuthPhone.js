@@ -15,6 +15,6 @@ module.exports.substract = function (arg0, success, error) {
 
 module.exports.getIdToken = function (_forceRefresh, success, error) {
     if (_forceRefresh == null) _forceRefresh = false;
-
+    alert("teste "+_forceRefresh);
     exec(success, error, PLUGIN_NAME, "getIdToken", [{forceRefresh: _forceRefresh}]);
 };

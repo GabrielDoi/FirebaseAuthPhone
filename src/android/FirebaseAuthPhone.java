@@ -131,7 +131,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     //===========================================================================================
     //medodos que deve colocar no executar
     private void getIdToken(boolean forceRefresh, CallbackContext callbackContext) {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
+        FirebaseUser user = this.firebaseAuth.getCurrentUser();
 
         if (user == null) {
             callbackContext.error("User is not authorized");
