@@ -13,10 +13,8 @@ module.exports.substract = function (arg0, success, error) {
 	exec(success, error, PLUGIN_NAME, 'substract', [arg0]);
 };
 
-module.exports.getIdToken = function (_forceRefresh) {
-	return new Promise(function(resolve, reject) {
-        if (_forceRefresh == null) _forceRefresh = false;
+module.exports.getIdToken = function (_forceRefresh, success, error) {
+    if (_forceRefresh == null) _forceRefresh = false;
 
-        exec(resolve, reject, PLUGIN_NAME, "getIdToken", [{forceRefresh: _forceRefresh}]);
-    });
+    exec(success, error, PLUGIN_NAME, "getIdToken", [{forceRefresh: _forceRefresh}]);
 };
