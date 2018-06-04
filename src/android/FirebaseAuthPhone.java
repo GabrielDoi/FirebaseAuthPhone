@@ -236,7 +236,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
     private void signInWithVerificationId(String verificationId, String code, CallbackContext callbackContext) {
         this.signinCallback = callbackContext;
 
-        this.signInWithPhoneCredential(PhoneAuthProvider.getCredential(verificationId, code));
+        signInWithPhoneCredential(PhoneAuthProvider.getCredential(verificationId, code));
     }
 
     //medodos que deve colocar no executar
@@ -245,7 +245,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential credential) {
-                    this.signInWithPhoneCredential(credential);
+                    signInWithPhoneCredential(credential);
                 }
 
                 @Override
