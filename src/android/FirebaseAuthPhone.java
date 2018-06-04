@@ -237,24 +237,28 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
     //medodos que deve colocar no executar
     private void verifyPhoneNumber(String phoneNumber, long timeoutMillis, final CallbackContext callbackContext) {
-        this.phoneAuthProvider.verifyPhoneNumber(phoneNumber, timeoutMillis, MILLISECONDS, cordova.getActivity(),
-            new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                @Override
-                public void onVerificationCompleted(PhoneAuthCredential credential) {
-                    signInWithPhoneCredential(credential);
-                }
+        try{
+            this.phoneAuthProvider.verifyPhoneNumber(phoneNumber, timeoutMillis, MILLISECONDS, cordova.getActivity(),
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(PhoneAuthCredential credential) {
+                        signInWithPhoneCredential(credential);
+                    }
 
-                @Override
-                public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                    callbackContext.success(verificationId);
-                }
+                    @Override
+                    public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        callbackContext.success(verificationId);
+                    }
 
-                @Override
-                public void onVerificationFailed(FirebaseException e) {
-                    callbackContext.error(e.getMessage());
+                    @Override
+                    public void onVerificationFailed(FirebaseException e) {
+                        callbackContext.error(e.getMessage());
+                    }
                 }
-            }
-        );
+            );
+        }catch(Exception ex){
+            callbackContext.error("Alguma coisa de errado: "+ ex);
+        }
     }
 
     private void signInWithPhoneCredential(PhoneAuthCredential credential) {
