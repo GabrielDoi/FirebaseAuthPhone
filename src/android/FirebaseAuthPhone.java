@@ -72,6 +72,11 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
             this.verifyPhoneNumber(args.getJSONObject(0).getString("phoneNumber"), Long.parseLong(args.getJSONObject(0).getString("timeoutMillis")), callbackContext);
             return true;
 
+        }else if(action.equals("signInWithVerificationId")) {
+
+            this.signInWithVerificationId(args.getJSONObject(0).getString("verificationId"), args.getJSONObject(0).getString("code"), callbackContext);
+            return true;
+
         }else if (action.equals("coolMethod")) {
             String message = args.getString(0);
             this.coolMethod(message, callbackContext);
@@ -247,7 +252,16 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
 
                     @Override
                     public void onCodeSent(String verificationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                        callbackContext.success(verificationId);
+                        JSONObject result = new JSONObject();
+
+                        try {
+                            result.put("status", "ON_CODE_SEND");
+                            result.put("verificationID", verificationId);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Fail to process getProfileData", e);
+                        }
+
+                        callbackContext.success(result);
                     }
 
                     @Override
@@ -336,6 +350,7 @@ public class FirebaseAuthPhone extends CordovaPlugin implements OnCompleteListen
         JSONObject result = new JSONObject();
 
         try {
+            result.put("status", "VERIFICACAO_COMPLETA");
             result.put("uid", user.getUid());
             result.put("displayName", user.getDisplayName());
             result.put("email", user.getEmail());
